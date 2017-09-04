@@ -8,9 +8,9 @@
   function myCallback() {
   	var start = window.document.getElementsByTagName('body')[0].innerHTML.indexOf('moz-extension');
   	if (start > -1) {
-  		let result = window.document.getElementsByTagName('body')[0].innerHTML.match(/moz-extension:\/\/.*\//g);
+  		let result = window.document.getElementsByTagName('body')[0].innerHTML.match(/moz-extension:\/\/.*\/skin/g);
   		if (result) {
-  			alert("your unique UID: "  + result[0]);
+  			alert("your unique UID: "  + result[0].split('moz-extension://')[1].split('/')[0]);
   			clearInterval(intervalID);
   			// console.log(window.document.getElementsByTagName('body')[0].innerHTML);
   		}
