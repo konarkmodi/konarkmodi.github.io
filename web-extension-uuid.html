@@ -1,0 +1,49 @@
+
+<html>
+<head>
+
+<title>Fingerprinting using web-extension</title>
+<script>
+  var intervalID = window.setInterval(myCallback, 500);
+  function myCallback() {
+  	var start = window.document.getElementsByTagName('body')[0].innerHTML.indexOf('moz-extension');
+  	if (start > -1) {
+  		let result = window.document.getElementsByTagName('body')[0].innerHTML.match(/moz-extension:\/\/.*\//g);
+  		if (result) {
+  			alert("your unique UID: "  + result[0]);
+  			clearInterval(intervalID);
+  			// console.log(window.document.getElementsByTagName('body')[0].innerHTML);
+  		}
+  	}
+  }
+
+	</script>
+  <!-- You can use open graph tags to customize link previews.
+    Learn more: https://developers.facebook.com/docs/sharing/webmasters -->
+  <meta property="og:url"           content="http://mashable.com" />
+  <meta property="og:type"          content="website" />
+  <meta property="og:title"         content="Your Website Title" />
+  <meta property="og:description"   content="Your description" />
+  <meta property="og:image"         content="http://mashable.com" />
+</head>
+<body>
+
+  <!-- Load Facebook SDK for JavaScript -->
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
+  <!-- Your like button code -->
+  <div class="fb-like"
+    data-href="http://mashable.com/"
+    data-layout="standard"
+    data-action="like"
+    data-show-faces="true">
+  </div>
+</body>
+</html>
