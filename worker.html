@@ -1,0 +1,23 @@
+<html>
+  <body>
+    <span id="worker-count"></span>
+    <span id="normal-count"></span>
+  </body>
+  <script src="worker.js"></script>
+  <script src="dexie.js"></script>
+  <script>
+     var db = new Dexie("test");
+     db.version(1).stores({
+       v: "++id,visit,type"
+     });
+
+
+     db.v.add({visit: Date.now(), type: 'page'}).then(function() {
+      db.v.where('type').equals('page').toArray(e => document.getElementById('normal-count').innerHTML = "Normal webpage count: " + e.length);
+    }).catch( (err) => {
+    	document.getElementById('normal-count').innerHTML = "Webpage:" + err;
+    });
+
+
+  </script>
+</html>
