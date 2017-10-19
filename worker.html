@@ -1,6 +1,6 @@
 <html>
   <body>
-    <span id="worker-count"></span>
+    <span id="worker-count"></span><br/>
     <span id="normal-count"></span>
   </body>
   <script src="worker.js"></script>
@@ -13,7 +13,7 @@
 
 
      db.v.add({visit: Date.now(), type: 'page'}).then(function() {
-      db.v.where('type').equals('page').toArray(e => document.getElementById('normal-count').innerHTML = "Normal webpage count: " + e.length);
+      db.v.where('type').equals('page').toArray(e => document.getElementById('normal-count').innerHTML = "Normal webpage count: " + e.length + "<br/>");
     }).catch( (err) => {
     	document.getElementById('normal-count').innerHTML = "Webpage:" + err;
     });
