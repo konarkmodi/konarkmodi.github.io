@@ -1,0 +1,33 @@
+<html>
+
+	<body>
+		<div id="result"></div>
+	    <script>
+		    var worker = null;
+		    if(!worker) {
+		    	worker = new SharedWorker('workert.js?q=2');
+		      	worker.port.onmessage = function(e) {
+		      	let result = JSON.parse(e.data);
+
+		      	let sum = {};
+		      	result.forEach(e => {
+		      		if (Object.keys(sum).indexOf(e) === -1) {
+		      			sum[e] = 0;
+		      		}
+		      		sum[e] += 1;
+		      	})
+		      	document.getElementById('result').innerHTML = JSON.stringify(sum);
+		      };
+		    }
+
+		    // Receive message from main window.
+			window.addEventListener("message", receiveMessage, false);
+			function receiveMessage(event)
+			{
+
+			console.log(event);
+			  worker.port.postMessage([event.data.href]);
+			}
+		</script>
+	</body>
+</html>

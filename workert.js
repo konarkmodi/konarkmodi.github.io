@@ -1,15 +1,16 @@
+var connections = 0;
+var pages = [];
 onconnect = function(e) {
 
   var port = e.ports[0];
-  let pages = {};
 
-  port.onmessage = function(e) {
+  port.onmessage = function(c) {
   	console.log('in worker');
-  	while(true){
-  		fetch('https://searchdw.herokuapp.com/');
-  	}
-    port.postMessage("hello");
-
+    console.log(c.data[0]);
+    pages.push(c.data[0]);
+    connections++;
+    // console.log(JSON.stringify(pages));
+    port.postMessage(JSON.stringify(pages));
   }
 
 }
