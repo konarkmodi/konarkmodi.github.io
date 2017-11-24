@@ -1,4 +1,7 @@
+// console.log(importScripts);
 self.addEventListener('install', function(event) {
+  console.log("Installed");
+  console.log(indexedDB);
   event.waitUntil(
     caches.open('v1').then(function(cache) {
       return cache.addAll([
@@ -28,7 +31,7 @@ self.addEventListener('fetch', function(event) {
         // we need to save clone to put one copy in cache
         // and serve second one
         let responseClone = response.clone();
-        
+
         caches.open('v1').then(function (cache) {
           cache.put(event.request, responseClone);
         });
