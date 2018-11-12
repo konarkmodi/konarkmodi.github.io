@@ -1,2 +1,6 @@
-window.localStorage.setItem('name', '1234');
-console.log(window.localStorage.getItem('name'));
+var uid = window.localStorage.getItem('name');
+
+if (!uid) {
+	window.localStorage.setItem('name', Math.random());
+}
+console.log(uid);
