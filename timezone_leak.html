@@ -1,0 +1,15 @@
+<html>
+
+<body>
+	If you using Tor mode, then this should be set to UTC.
+	<a href='https://2019.www.torproject.org/projects/torbrowser/design/'>More details under section Timezone and Clock
+		Offset.</a><br />
+	Current time:
+	<div id="current_tz"></div>
+	<script>
+		const d = new Date();
+		document.getElementById('current_tz').innerText = d;
+	</script>
+</body>
+
+</html>
