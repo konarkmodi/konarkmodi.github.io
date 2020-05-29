@@ -1,0 +1,32 @@
+<html>
+	<body>
+  1. Iframe with referrer-policy.<br/>
+  <iframe style="display:none;" id="test" srcdoc='<head><meta name="referrer" content="no-referrer" /></head><iframe src="https://baley-elijah.herokuapp.com/test_iframe_post_message/q=2" referrerpolicy="no-referrer"></iframe><script>function incomingMsg(evt){window.parent.postMessage({counter: evt.data.counter})};window.addEventListener("message", incomingMsg, false)</script>'>
+  </iframe>
+  <br/>
+
+  <h3>Parent page: Visit number via iframe: </h3> <div id="visit"></div>
+  <script>
+	// const trusted_origin = "https://baley-elijah.herokuapp.com"
+	window.onload = function() {
+        var data = {};
+        data.ref = document.referrer;
+        data.url = window.location.href;
+        data.title = document.title;
+		document.getElementById('test').contentDocument.querySelector('iframe').contentWindow.postMessage("test", "*");
+    }
+	function updateCounter(c) {
+		document.getElementById('visit').textContent = c;
+	}
+	function incomingMsg(evt) {
+		console.log(evt);
+        //if (evt.origin === trusted_origin) {
+          // Set button hrefs.
+          updateCounter(evt.data.counter);
+        //}
+      }
+
+      window.addEventListener("message", incomingMsg, false);
+  </script>
+</body>
+</html>
