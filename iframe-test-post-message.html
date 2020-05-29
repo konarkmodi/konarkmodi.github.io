@@ -1,7 +1,7 @@
 <html>
 	<body>
   1. Iframe with referrer-policy.<br/>
-  <iframe style="display:none;" id="test" srcdoc='<head><meta name="referrer" content="no-referrer" /></head><iframe src="https://baley-elijah.herokuapp.com/test_iframe_post_message/q=2" referrerpolicy="no-referrer"></iframe><script>function incomingMsg(evt){window.parent.postMessage({counter: evt.data.counter}, "*")};window.addEventListener("message", incomingMsg, false)</script>'>
+  <iframe style="display:none;" id="test" srcdoc='<head><meta name="referrer" content="no-referrer" /></head><iframe src="https://baley-elijah.herokuapp.com/test_iframe_post_message/q=2" referrerpolicy="no-referrer">'>
   </iframe>
   <br/>
 
