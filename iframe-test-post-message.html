@@ -1,29 +1,36 @@
 <html>
 	<body>
-  1. Iframe with referrer-policy.<br/>
-  <iframe style="display:none;" id="test" srcdoc='<head><meta name="referrer" content="no-referrer" /></head><iframe src="https://baley-elijah.herokuapp.com/test_iframe_post_message/q=2" referrerpolicy="no-referrer">'>
+
+		<ul>
+			<li>github.io is the publisher page, loading iframe from payment provider herokuapp.com</li>
+			<li>herokuapp.com should not learn, that the iFrame is loaded on github.io.</li>
+			<li>Lack of this origin, might make it susceptible to attacks to steal data, therefore herokuapp.com should be able to verify on the client-side that the message comes from trusted source. </li>
+			<li>The same way, when herokuapp sends the message back, github.io should be able to verify it's coming from trusted source. </li>
+		</ul>
+
+  <iframe style="display:none;" id="test" srcdoc='<head><meta name="referrer" content="no-referrer" /></head><iframe src="https://baley-elijah.herokuapp.com/test_iframe_post_message/q=2" referrerpolicy="no-referrer"></iframe>'>
   </iframe>
   <br/>
 
-  <h3>Parent page: Visit number via iframe: </h3> <div id="visit"></div>
+  <h3>Visit Number: </h3> <div id="visit"></div>
   <script>
-	// const trusted_origin = "https://baley-elijah.herokuapp.com"
+	var trusted_origin = "https://baley-elijah.herokuapp.com"
 	window.onload = function() {
         var data = {};
         data.ref = document.referrer;
         data.url = window.location.href;
         data.title = document.title;
-		document.getElementById('test').contentDocument.querySelector('iframe').contentWindow.postMessage("test", "*");
+		document.getElementById('test').contentDocument.querySelector('iframe').contentWindow.postMessage("test", trusted_origin);
     }
 	function updateCounter(c) {
 		document.getElementById('visit').textContent = c;
 	}
 	function incomingMsg(evt) {
 		console.log(evt);
-        //if (evt.origin === trusted_origin) {
+        if (evt.origin === trusted_origin) {
           // Set button hrefs.
           updateCounter(evt.data.counter);
-        //}
+        }
       }
 
       window.addEventListener("message", incomingMsg, false);
