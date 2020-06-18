@@ -1,0 +1,19 @@
+<html>
+	<body>
+			<strong>Your visit number:</strong>
+			<div id="result"></div>
+
+			<script>
+					let visitNumber = localStorage.getItem("visitNumber");
+					if (!visitNumber) {
+						visitNumber = 0;
+					}
+					visitNumber = parseInt(visitNumber) + 1 ;
+					document.getElementById('result').textContent = visitNumber;
+					localStorage.setItem("visitNumber", visitNumber);
+
+					localStorage.setItem("destination", JSON.stringify({"destination": "unknown"}));
+			</script>
+	</body>
+
+</html>
