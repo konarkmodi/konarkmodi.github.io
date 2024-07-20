@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<body>
+<div id="result"></div>
+  <script type="module">
+    if (window.top === window) {
+      document.body.append(document.createRange().createContextualFragment(`
+        <iframe src="/index.html"></iframe>
+      `))
+    }
+    console.log(await caches.keys());
+    const r = await caches.keys();
+    document.getElementById('result').textContent = JSON.stringify(r)
+    const foo = await caches.open("visited");
+    foo.add(new URL(location.href));
+  </script>
